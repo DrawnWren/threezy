@@ -10,6 +10,7 @@ var i = 0;
 var render = function () {
   requestAnimationFrame( render );
   renderer.render( scene, camera );
+  updateAudioArr();
 };
 
 var addToScene = function (arg) {
