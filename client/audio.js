@@ -15,7 +15,7 @@ var frequencyArr = new Uint8Array(100);
 var audioRadius = function (enemArr) {
   var newE = enemArr.slice();
   analyser.getByteFrequencyData(frequencyArr);
-  var split =  frequencyArr.length / newE.length; //length of array splits to make
+  var split = frequencyArr.length / newE.length; //length of array splits to make
 
   for (i = 0; i < newE.length; i++) {
     var s = frequencyArr.slice(i * split, (i + 1) * split);

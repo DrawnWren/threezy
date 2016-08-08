@@ -6,7 +6,9 @@ renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
 
 camera.position.z = 5;
-var i = 0;
+
+var globalOptions = {numSpheres: 3};
+
 var render = function () {
   requestAnimationFrame( render );
   renderer.render( scene, camera );
