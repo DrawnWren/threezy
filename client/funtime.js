@@ -7,7 +7,17 @@ document.body.appendChild( renderer.domElement );
 
 camera.position.z = 5;
 
-var globalOptions = {numSpheres: 3};
+var globalOptions = {numSpheres: 3, radius: 5};
+
+var init = function () {
+  makeNSpheres(globalOptions.numSpheres);
+  addSpheresToScene(scene);
+  spreadThemSpheres(spheres);
+  setCamera(globalOptions.numSpheres);
+  render();
+};
+
+window.onload = init;
 
 var render = function () {
   requestAnimationFrame( render );
@@ -19,4 +29,21 @@ var addToScene = function (arg) {
   scene.add(arg);
 };
 
-window.onload = render;
+
+// ***********************
+// Init Helper Functions
+// 
+// 
+// 
+// ***********************
+var spreadThemSpheres = function(spheres) {
+  for (var i = 0; i < spheres.length; i++ ) {
+    spheres[i].sphere.position.x = i * (globalOptions.radius * 4);
+  }
+};
+
+//Given a number of spheres, sets the 
+// camer to an appropriate position
+var setCamera = function () {
+  //blah
+};
