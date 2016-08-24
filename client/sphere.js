@@ -27,3 +27,16 @@ var makeNSpheres = function (n) {
     makeSphere();
   }
 };
+
+Sphere.prototype.updateGeometry = function (radius, wSeg, hSeg) {
+    this.sphere.geometry.dispose();
+    this.geometry = new THREE.SphereGeometry( radius, wSeg, hSeg);
+    this.sphere.geometry = this.geometry.clone(); 
+};
+
+var spreadThemSpheres = function(spheres) {
+  for (var i = 0; i < spheres.length; i++ ) {
+    spheres[i].sphere.position.x = i * (globalOptions.radius * 4);
+  }
+};
+

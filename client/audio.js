@@ -8,7 +8,7 @@ var analyser = audioCtx.createAnalyser();
 audioSrc.connect(analyser);
 audioSrc.connect(audioCtx.destination);
 
-var frequencyArr = new Uint8Array(100);
+var frequencyArr = new Uint8Array(1024);
 
 //##FIXME## Function only works for enemies currently,
 //need to refactor to work w/ geometry
@@ -29,3 +29,4 @@ var updateAudioArr = function () {
   analyser.getByteFrequencyData(frequencyArr);
 };
 
+renderSystem.enqueue(updateAudioArr); //Enqeueue the audio update in the render loop

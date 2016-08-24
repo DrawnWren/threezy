@@ -1,49 +1,34 @@
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000);
-
 var renderer = new THREE.WebGLRenderer();
-renderer.setSize( window.innerWidth, window.innerHeight );
-document.body.appendChild( renderer.domElement );
 
-camera.position.z = 5;
+var globalOptions = {numSpheres: 3, radius: 5, wSegments: 8, hSegments: 6};
 
-var globalOptions = {numSpheres: 3, radius: 5};
 
-var init = function () {
-  makeNSpheres(globalOptions.numSpheres);
-  addSpheresToScene(scene);
-  spreadThemSpheres(spheres);
-  setCamera(globalOptions.numSpheres);
-  render();
+//******************
+
+
+var rendererInit = function() {
+    renderer.setSize( window.innerWidth, window.innerHeight );
+    document.body.appendChild( renderer.domElement );
 };
 
-window.onload = init;
+var cameraInit = function () {
 
-var render = function () {
-  requestAnimationFrame( render );
-  renderer.render( scene, camera );
-  updateAudioArr();
+    var lookPoint = new THREE.Vector3(100,-10,1000);
+    camera.lookAt(lookPoint);
+    camera.position.z = 1000;
+    camera.position.x = 1000;
+    camera.position.y = 20;
+
 };
 
-var addToScene = function (arg) {
-  scene.add(arg);
-};
+var initArray = [rendererInit, cameraInit];
 
+var optionMap = {renderer: renderer,
+                camera: camera,
+                scene: scene,
+                init: initArray};
 
-// ***********************
-// Init Helper Functions
-// 
-// 
-// 
-// ***********************
-var spreadThemSpheres = function(spheres) {
-  for (var i = 0; i < spheres.length; i++ ) {
-    spheres[i].sphere.position.x = i * (globalOptions.radius * 4);
-  }
-};
-
-//Given a number of spheres, sets the 
-// camer to an appropriate position
-var setCamera = function () {
-  //blah
-};
+var renderSystem = new RenderEventSystem(optionMap);
+renderSystem.scheduleRender();
